@@ -16,12 +16,9 @@ def get_udi(url):# 获得pubmed文献的uid
     # 参数说明：url:构建的用于检索的url; i：检索关键词； basepath:保存的根目录
     docsums = requests.get(url).text
     # print(docsums)
-
     ids = re.findall(r'<Id>(\d+)</Id>', docsums)
     return ids
    
-
-
 
 def get_xml(uidlist, base_url, basepath):   #根据uid下载xml
     count = len(uidlist)
@@ -46,9 +43,7 @@ def get_xml(uidlist, base_url, basepath):   #根据uid下载xml
     print(time.ctime())
 
 
-
-def makedirfile(root):
-    #创建文件夹
+def makedirfile(root): #创建文件夹
     if os.path.exists(root):
         pass
     else:
@@ -66,7 +61,6 @@ def downloadXML(basepath, query):
     print(url)
 
     output = requests.get(url).text
-
     web = re.findall(r'<WebEnv>(.*?)</WebEnv>', output)[0]
     key = re.findall(r'<QueryKey>(\d+)</QueryKey>', output)[0]
     count = re.findall(r'<Count>(\d+?)</Count>', output)[0]
